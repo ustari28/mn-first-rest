@@ -13,6 +13,8 @@
     <exec.mainClass>mn.first.rest.Application</exec.mainClass>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
+    <graalvm.plugin>19.1.0</graalvm.plugin>
+    <lombok.version>1.18.0</lombok.version>
   </properties>
   <repositories>
     <repository>
@@ -57,6 +59,13 @@
       <artifactId>micronaut-http-client</artifactId>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+      <version>${lombok.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
@@ -118,6 +127,25 @@
           </arguments>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>com.oracle.substratevm</groupId>
+        <artifactId>native-image-maven-plugin</artifactId>
+        <version>${graalvm.plugin}</version>
+        <executions>
+          <execution>
+            <id>native</id>
+            <goals>
+              <goal>native-image</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>mn.first.rest.Application</mainClass>
+          <imageName>${project.artifactId}-${project.version}</imageName>
+          <buildArgs>--static --verbose --report-unsupported-elements-at-runtime</buildArgs>
+        </configuration>
+      </plugin>
     </plugins>
     <pluginManagement>
       <plugins>
@@ -163,6 +191,11 @@
                     <groupId>io.micronaut</groupId>
                     <artifactId>micronaut-validation</artifactId>
                     <version>${micronaut.version}</version>
+                  </path>
+                  <path>
+                      <groupId>org.projectlombok</groupId>
+                      <artifactId>lombok</artifactId>
+                      <version>${lombok.version}</version>
                   </path>
             </annotationProcessorPaths>
           </configuration>
