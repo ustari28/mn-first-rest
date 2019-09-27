@@ -87,6 +87,12 @@
       <artifactId>micronaut-test-junit5</artifactId>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>com.oracle.substratevm</groupId>
+      <artifactId>svm</artifactId>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -127,25 +133,7 @@
           </arguments>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>com.oracle.substratevm</groupId>
-        <artifactId>native-image-maven-plugin</artifactId>
-        <version>${graalvm.plugin}</version>
-        <executions>
-          <execution>
-            <id>native</id>
-            <goals>
-              <goal>native-image</goal>
-            </goals>
-            <phase>package</phase>
-          </execution>
-        </executions>
-        <configuration>
-          <mainClass>mn.first.rest.Application</mainClass>
-          <imageName>${project.artifactId}-${project.version}</imageName>
-          <buildArgs>--static --verbose --report-unsupported-elements-at-runtime</buildArgs>
-        </configuration>
-      </plugin>
+
     </plugins>
     <pluginManagement>
       <plugins>
@@ -184,6 +172,11 @@
             <annotationProcessorPaths>
                   <path>
                     <groupId>io.micronaut</groupId>
+                    <artifactId>micronaut-graal</artifactId>
+                    <version>${micronaut.version}</version>
+                  </path>
+                  <path>
+                    <groupId>io.micronaut</groupId>
                     <artifactId>micronaut-inject-java</artifactId>
                     <version>${micronaut.version}</version>
                   </path>
@@ -210,6 +203,11 @@
                   <arg>-parameters</arg>
                 </compilerArgs>
                 <annotationProcessorPaths>
+                  <path>
+                    <groupId>io.micronaut</groupId>
+                    <artifactId>micronaut-graal</artifactId>
+                    <version>${micronaut.version}</version>
+                  </path>
                   <path>
                     <groupId>io.micronaut</groupId>
                     <artifactId>micronaut-inject-java</artifactId>
