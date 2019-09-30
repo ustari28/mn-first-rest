@@ -1,4 +1,10 @@
-FROM adoptopenjdk/openjdk11-openj9:jdk-11.0.1.13-alpine-slim
-COPY target/mn-first-rest-*.jar mn-first-rest.jar
+FROM oracle/graalvm-ce:latest as graalvm
+COPY . /home/app/mnfirstrest
+WORKDIR /home/app/mnfirstrest
+RUN gu install native-image
+RUN native-image --no-server -cp target/mn-first-rest-*.jar
+
+FROM frolvlad/alpine-glibc
 EXPOSE 8080
-CMD java -Dcom.sun.management.jmxremote -noverify ${JAVA_OPTS} -jar mn-first-rest.jar
+COPY --from=graalvm /home/app/mnfirstrest .
+ENTRYPOINT ["./mnfirstrest"]
