@@ -5,7 +5,7 @@
 - Install [micronaut cli](https://docs.micronaut.io/latest/guide/quickStart.html).
 ## Create new application
 ````shell script
-mn create-app mn-first-rest --feature graal-native-image --build maven
+mn create-app mn-first-rest --features graal-native-image --build maven
 ````
 The default embebed server is netty. This server gives no-blocking environment.
 ````xml
