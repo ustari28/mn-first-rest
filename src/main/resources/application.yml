@@ -1,11 +1,11 @@
 micronaut:
   application:
-    name: mn-first-rest
-jackson:
-  serializationInclusion: ALWAYS
-  serialization:
-    indentOutput: true
-    writeDatesAsTimestamps: false
-  deserialization:
-    useBigIntegerForInts: true
-    failOnUnknownProperties: false
+    name: "${HOSTNAME:mn-first-rest}"
+eureka:
+  client:
+    registration:
+      enabled: true
+      appname: "${HOSTNAME:mn-first-rest}"
+    defaultZone: "${EUREKA_SERVER:localhost}:${EUREKA_PORT:8761}/eureka"
+  instance:
+    prefer-ip-address: true

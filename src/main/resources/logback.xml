@@ -8,6 +8,11 @@
             <pattern>%cyan(%d{HH:mm:ss.SSS}) %gray([%thread]) %highlight(%-5level) %magenta(%logger{36}) - %msg%n</pattern>
         </encoder>
     </appender>
+    <logger name="io.micronaut.discovery"  level="DEBUG" />
+    <logger name="io.micronaut.context"  level="DEBUG" />
+    <logger name="io.micronaut.discovery.registration"  level="DEBUG" />
+    <logger name="io.micronaut.http.client" level="DEBUG" />
+    <logger name="io.netty.channel" level="DEBUG" />
 
     <root level="info">
         <appender-ref ref="STDOUT" />
