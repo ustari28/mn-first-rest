@@ -1,0 +1,7 @@
+FROM oracle/graalvm-ce:19.2.1 as graalvm
+COPY . /home/app/eureka-cliente-sample
+WORKDIR /home/app/eureka-cliente-sample
+COPY target/mn-first-rest-*.jar eureka-cliente-sample-RELEASE.jar
+RUN chmod 755 eureka-cliente-sample-RELEASE.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "-Dfile.encoding=UTF-8", "eureka-cliente-sample-RELEASE.jar"]

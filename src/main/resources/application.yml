@@ -1,11 +1,13 @@
 micronaut:
   application:
-    name: "${HOSTNAME:mn-first-rest}"
+    name: "mn-first-rest-${HOSTNAME}"
 eureka:
   client:
     registration:
       enabled: true
-      appname: "${HOSTNAME:mn-first-rest}"
+      app-group-name: ${micronaut.application.name}-balancer
+      hostname: ${HOSTNAME}
+      #appname: "${HOSTNAME:mn-first-rest}"
     defaultZone: "${EUREKA_SERVER:localhost}:${EUREKA_PORT:8761}/eureka"
   instance:
     prefer-ip-address: true
