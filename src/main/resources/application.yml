@@ -1,13 +1,17 @@
 micronaut:
+  #server:
+    #port: 8091
   application:
     name: "mn-first-rest-${HOSTNAME}"
-eureka:
-  client:
-    registration:
-      enabled: true
-      app-group-name: ${micronaut.application.name}-balancer
-      hostname: ${HOSTNAME}
-      #appname: "${HOSTNAME:mn-first-rest}"
-    defaultZone: "${EUREKA_SERVER:localhost}:${EUREKA_PORT:8761}/eureka"
-  instance:
-    prefer-ip-address: true
+endpoints:
+  health:
+    enabled: true
+    sensitive: true
+    details-visible: ANONYMOUS
+tracing:
+  zipkin:
+    enabled: true
+    sampler:
+      probability: 1
+    http:
+      url: http://zipkin.local:9411

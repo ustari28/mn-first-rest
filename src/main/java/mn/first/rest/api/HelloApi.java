@@ -5,7 +5,5 @@ import mn.first.rest.model.Greeting;
 
 public interface HelloApi {
 
-    String greeting();
-
-    HttpResponse<Greeting> hello();
+    HttpResponse<Greeting> greeting();
 }

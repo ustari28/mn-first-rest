@@ -4,12 +4,15 @@ import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
+import io.micronaut.tracing.annotation.NewSpan;
+import lombok.extern.slf4j.Slf4j;
 import mn.first.rest.api.HelloApi;
 import mn.first.rest.model.Greeting;
 import mn.first.rest.service.HelloService;
 import mn.first.rest.service.impl.GreetingHelloService;
 
-@Controller("/api/v1/hello")
+@Controller("/api/hello/v1")
+@Slf4j
 public class HelloController implements HelloApi {
 
     HelloService helloService;
@@ -18,15 +21,10 @@ public class HelloController implements HelloApi {
         this.helloService = helloService;
     }
 
-    @Get(value = "/greeting", produces = MediaType.TEXT_PLAIN)
+    @NewSpan("greeting")
+    @Get(value = "/greeting", produces = MediaType.APPLICATION_JSON)
     @Override
-    public String greeting() {
-        return this.helloService.hello();
-    }
-
-    @Get(value = "/hello", produces = MediaType.APPLICATION_JSON)
-    @Override
-    public HttpResponse<Greeting> hello() {
+    public HttpResponse<Greeting> greeting() {
         return HttpResponse.ok(Greeting.builder().action("Hello").build());
     }
 }

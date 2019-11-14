@@ -1,5 +1,5 @@
 #!/bin/sh
-docker build . -t mn-first-rest:1.0.0
+docker build --rm . -t mn-first-rest:1.0.0
 echo
 echo
 echo "To run the docker container execute:"

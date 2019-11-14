@@ -1,10 +1,4 @@
 FROM oracle/graalvm-ce:19.2.1 as graalvm
-COPY . /home/app/mnfirstrest
-WORKDIR /home/app/mnfirstrest
-RUN gu install native-image
-RUN native-image --no-server --initialize-at-run-time=io.micronaut.discovery.aws.parameterstore.AWSParameterStoreConfigClient,io.micronaut.http.client.DefaultHttpClient -cp target/mn-first-rest-*.jar
-
-FROM frolvlad/alpine-glibc
 LABEL application=mn-first-rest \
       traefik.enable="true" \
       traefik.docker.network=traefik-nt \
@@ -14,6 +8,9 @@ LABEL application=mn-first-rest \
       traefik.http.routers.mn-first-rest.middlewares="mn-first-rest" \
       traefik.http.services.mn-first-rest.loadBalancer.server.port="8080" \
       traefik.http.middlewares.mn-first-rest.stripprefix.prefixes="/mn-first-rest/"
+COPY . /home/app/eureka-cliente-sample
+WORKDIR /home/app/eureka-cliente-sample
+COPY target/mn-first-rest-*.jar eureka-cliente-sample-RELEASE.jar
+RUN chmod 755 eureka-cliente-sample-RELEASE.jar
 EXPOSE 8080
-COPY --from=graalvm /home/app/mnfirstrest .
-ENTRYPOINT ["./mnfirstrest"]
+ENTRYPOINT ["java", "-jar", "-Dfile.encoding=UTF-8", "eureka-cliente-sample-RELEASE.jar"]
