@@ -2,7 +2,7 @@ micronaut:
   #server:
     #port: 8091
   application:
-    name: "mn-first-rest-${HOSTNAME}"
+    name: "mn-first-rest"
 endpoints:
   health:
     enabled: true
