@@ -9,9 +9,13 @@ endpoints:
     sensitive: true
     details-visible: ANONYMOUS
 tracing:
-  zipkin:
+  jaeger:
     enabled: true
     sampler:
       probability: 1
-    http:
-      url: http://zipkin.local:9411
+    sender:
+      agentHost: jaeger-collector.local
+      agentPort: 5775
+    reporter:
+      flushInterval: 1000
+      maxQueueSize: 100
