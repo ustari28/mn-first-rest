@@ -6,7 +6,7 @@
     <artifactId>mn-first-rest</artifactId>
     <version>0.1</version>
     <properties>
-        <micronaut.version>1.2.5</micronaut.version>
+        <micronaut.version>1.2.6</micronaut.version>
         <jdk.version>1.8</jdk.version>
         <maven.compiler.target>${jdk.version}</maven.compiler.target>
         <maven.compiler.source>${jdk.version}</maven.compiler.source>
@@ -15,7 +15,7 @@
         <exec.mainClass>mn.first.rest.Application</exec.mainClass>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
-        <graalvm.plugin>19.1.0</graalvm.plugin>
+        <graalvm.plugin>19.3.0</graalvm.plugin>
         <lombok.version>1.18.0</lombok.version>
     </properties>
     <repositories>

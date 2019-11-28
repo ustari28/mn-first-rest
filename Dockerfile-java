@@ -1,4 +1,4 @@
-FROM oracle/graalvm-ce:19.2.1 as graalvm
+FROM oracle/graalvm-ce:19.3.0 as graalvm
 LABEL application=mn-first-rest \
       traefik.enable="true" \
       traefik.docker.network=traefik-nt \
@@ -8,9 +8,9 @@ LABEL application=mn-first-rest \
       traefik.http.routers.mn-first-rest.middlewares="mn-first-rest" \
       traefik.http.services.mn-first-rest.loadBalancer.server.port="8080" \
       traefik.http.middlewares.mn-first-rest.stripprefix.prefixes="/mn-first-rest/"
-COPY . /home/app/eureka-cliente-sample
-WORKDIR /home/app/eureka-cliente-sample
-COPY target/mn-first-rest-*.jar eureka-cliente-sample-RELEASE.jar
-RUN chmod 755 eureka-cliente-sample-RELEASE.jar
+COPY . /home/app/mn-first-rest
+WORKDIR /home/app/mn-first-rest
+COPY target/mn-first-rest-*.jar mn-first-rest-RELEASE.jar
+RUN chmod 755 mn-first-rest-RELEASE.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "-Dfile.encoding=UTF-8", "eureka-cliente-sample-RELEASE.jar"]
+ENTRYPOINT ["java", "-jar", "-Dfile.encoding=UTF-8", "mn-first-rest-RELEASE.jar"]

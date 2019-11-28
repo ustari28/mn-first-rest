@@ -1,4 +1,4 @@
-FROM oracle/graalvm-ce:19.2.1 as graalvm
+FROM oracle/graalvm-ce:19.3.0 as graalvm
 COPY . /home/app/mnfirstrest
 WORKDIR /home/app/mnfirstrest
 RUN gu install native-image

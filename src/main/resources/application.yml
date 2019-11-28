@@ -14,7 +14,7 @@ tracing:
     sampler:
       probability: 1
     sender:
-      agentHost: jaeger-collector.local
+      agentHost: jaeger-agent.local
       agentPort: 5775
     reporter:
       flushInterval: 1000
