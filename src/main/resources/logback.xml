@@ -14,7 +14,7 @@
     <logger name="io.micronaut.http.client" level="DEBUG" />
     <logger name="io.netty.channel" level="DEBUG" -->
 
-    <root level="info">
+    <root level="debug">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>

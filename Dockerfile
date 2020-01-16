@@ -1,6 +1,6 @@
 FROM oracle/graalvm-ce:19.3.0 as graalvm
-COPY . /home/app/mnfirstrest
-WORKDIR /home/app/mnfirstrest
+COPY . /home/app/mnfirstrest/
+WORKDIR /home/app/mnfirstrest/
 RUN gu install native-image
 RUN native-image --no-server --initialize-at-run-time=io.micronaut.discovery.aws.parameterstore.AWSParameterStoreConfigClient,io.micronaut.http.client.DefaultHttpClient,io.micronaut.tracing.instrument.rxjava.RxJava1TracingInstrumentation -cp target/mn-first-rest-*.jar
 
@@ -16,4 +16,6 @@ LABEL application=mn-first-rest \
       traefik.http.middlewares.mn-first-rest.stripprefix.prefixes="/mn-first-rest/"
 EXPOSE 8080
 COPY --from=graalvm /home/app/mnfirstrest .
+RUN pwd
+RUN ls -l .
 ENTRYPOINT ["./mnfirstrest"]
